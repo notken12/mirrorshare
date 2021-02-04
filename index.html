@@ -7,11 +7,35 @@
     <link rel="stylesheet" href="./styles/index.css">
     <title>MirrorShare</title>
 
-    <script async data-main="js/app/main" src="js/lib/require.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
 </head>
 
 <body>
-    under construction
+    <div id="file-dropzone-container">
+        <input type="file" name="file" id="file-input">
+
+        <div id="file-dropzone" class="upload-area">
+            <h1>Drop files here or click to choose files</h1>
+        </div>
+    </div>
+    <form action="" id="upload-form">
+        <input type="file" id="file-input">
+        <input type="submit" id="submit-file" value="Upload file">
+    </form>
+
+    <div id="sign-in-status"></div>
+    <button id="sign-in-button">Sign in</button>
+    <button id="sign-out-button">Sign out</button>
+    <div id="account-details"></div>
+    <div id="firebaseui-auth-container"></div>
+
+
+
+
+    <div id="shared-images"></div>
+    <div id="uploading-loader" style="display: none;">Uploading...</div>
+
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -23,6 +47,11 @@
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
+
+    <script async data-main="js/app/main" src="js/lib/require.js"></script>
+
 </body>
+
 
 </html>

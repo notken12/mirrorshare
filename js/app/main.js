@@ -21,20 +21,52 @@ const firebaseConfig = {
     messagingSenderId: "191266679593",
     appId: "1:191266679593:web:87f1573f22ed34551ae538",
     measurementId: "G-XG3R6KJR4X"
-  };
+};
 firebase.initializeApp(firebaseConfig);
 
 // Start the main app logic.
-requirejs(['jquery', 'app/helper/util', 'print', 'app/auth', 'app/db'],
-function   ($, util, print, auth, db) {
-    //jQuery, +other modules are all
-    //loaded and can be used here now.
+requirejs(['jquery', 'app/helper/util', 'print', 'app/auth', 'app/db', 'app/el', 'app/authui',
+    'app/login', 'app/logout', 'app/fetch', 'app/storage', 'app/upload'],
+    function ($, util, print, auth, db, el, authui, login, logout, fetch, storage, upload) {
+        //jQuery, +other modules are all
+        //loaded and can be used here now.
 
-    //main code goes here
+        //main code goes here
 
-    print(util.getSmiley());
-    print('"print" module says hi!');
-    print(firebase);
-    print(auth);
-    print(db);
-});
+        print(util.getSmiley());
+        print('"print" module says hi!');
+        print(firebase);
+        print(auth);
+        print(db);
+
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var uid = user.uid;
+                var phoneNumber = user.phoneNumber;
+                var providerData = user.providerData;
+
+                login.handle();
+                fetch();
+
+                el.auth.signOutButton.click(function () {
+                    auth.signOut();
+                    logout.handle();
+                });
+            } else {
+                // User is signed out.
+                el.auth.signInStatus.text('Signed out');
+                el.auth.signInButton.show();
+                el.auth.signOutButton.hide();
+
+                el.auth.signInButton.click(authui.start);
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    });

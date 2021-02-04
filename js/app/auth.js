@@ -1,3 +1,5 @@
-define(function() {
-    return firebase.auth()
-})
+define(function () {
+    var auth = firebase.auth();
+
+    return auth;
+});
