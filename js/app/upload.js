@@ -11,21 +11,35 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
     el.fileDropzone.on('dragenter', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        el.fileDropzoneLabel.text("Drop");
+
+        util.fadeOutNoFlicker(el.sharedFiles);
+
+        el.fileDropzoneLabel.text("Drop file here");
+        el.fileDropzoneLabel.fadeIn('fast');
     });
 
     // Drag over
     el.fileDropzone.on('dragover', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        el.fileDropzoneLabel.text("Drop");
+
+        util.fadeOutNoFlicker(el.sharedFiles);
+
+        el.fileDropzoneLabel.text("Drop file here");
+        el.fileDropzoneLabel.fadeIn('fast');
     });
 
     // Drag leave
     el.fileDropzone.on('dragleave', function (e) {
         e.stopPropagation();
         e.preventDefault();
+
+        util.fadeInNoFlicker(el.sharedFiles);
+
         el.fileDropzoneLabel.text("Drop files here or click to choose files");
+        if (el.sharedFiles.children().length < 1) {
+            util.fadeInNoFlicker(el.fileDropzoneLabel);
+        }
     });
 
     // Drop
@@ -56,6 +70,9 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
             //no file
             return;
         }
+        
+        util.fadeInNoFlicker(el.fileDropzoneLabel);
+        el.fileDropzoneLabel.text("Uploading...");
 
         var user = auth.currentUser;
         var uid = user.uid;
@@ -80,7 +97,6 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
 
             var fileRef = filesRef.child(id + "." + extension);
 
-            el.fileDropzoneLabel.text("Uploading...");
             fileRef.put(file).then(function (snapshot) {
                 filesDoc.set({
                     files: [

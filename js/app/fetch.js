@@ -1,11 +1,11 @@
-define(["app/auth", "app/db", "app/storage", "app/el"], function(auth, db, storage, el) {
+define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], function (auth, db, storage, el, util) {
     function fetch() {
         var user = auth.currentUser;
         var uid = user.uid;
 
         var storageRef = storage.ref();
         var filesRef = storageRef.child("usercontent").child(uid);
-        
+
         var userDoc = db.collection("users").doc(uid);
         var userFilesDoc = db.collection("usercontent").doc(uid);
 
@@ -25,18 +25,40 @@ define(["app/auth", "app/db", "app/storage", "app/el"], function(auth, db, stora
                     var img = document.createElement("img");
                     img.classList.add("shared-image");
                     img.setAttribute("src", url);
+                    img.setAttribute("title", "Click to copy")
+                    img.addEventListener('click', function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.responseType = 'blob';
+                        xhr.onload = (event) => {
+                            var blob = xhr.response;
+                            try {
+                                navigator.clipboard.write([
+                                    new ClipboardItem({
+                                        'image/png': blob
+                                    })
+                                ]);
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        };
+                        xhr.open('GET', url);
+                        xhr.send();
+                    });
 
                     imgsToBeAdded.push(img);
                     if (imgsToBeAdded.length == data.files.length) {
                         //all images are loaded
                         //replace shared images
-                        el.sharedImages.empty();
+                        el.sharedFiles.empty();
                         for (var img of imgsToBeAdded) {
-                            el.sharedImages.append(img);
+                            el.sharedFiles.append(img);
                         }
+                        util.fadeInNoFlicker(el.sharedFiles);
+                        util.fadeOutNoFlicker(el.fileDropzoneLabel);
                     }
                 });
-                
+
+
             }
         });
 

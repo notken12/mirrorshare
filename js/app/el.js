@@ -8,7 +8,7 @@ define(["jquery"], function ($) {
         },
         submitFile: $("#submit-file"),
         fileInput: $("#file-input"),
-        sharedImages: $("#shared-images"),
+        sharedFiles: $("#shared-files"),
         uploadingLoader: $("#uploading-loader"),
         fileDropzone: $("#file-dropzone"),
         fileDropzoneLabel: $("#file-dropzone h1")

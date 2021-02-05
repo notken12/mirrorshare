@@ -24,16 +24,18 @@
         <input type="submit" id="submit-file" value="Upload file">
     </form>
 
-    <div id="sign-in-status"></div>
-    <button id="sign-in-button">Sign in</button>
-    <button id="sign-out-button">Sign out</button>
-    <div id="account-details"></div>
+    <div id="auth-status-container">
+        <div id="sign-in-status"></div>
+        <button id="sign-in-button">Sign in</button>
+        <button id="sign-out-button">Sign out</button>
+        <div id="account-details"></div>
+    </div>
     <div id="firebaseui-auth-container"></div>
 
 
 
 
-    <div id="shared-images"></div>
+    <div id="shared-files" style="display: none;"></div>
     <div id="uploading-loader" style="display: none;">Uploading...</div>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->

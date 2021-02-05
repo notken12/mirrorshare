@@ -4,13 +4,24 @@
 }
 
 body {
-    background: #222;
-    color: white;
+    background: #fff;
+    color: #111;
     font-family: Manrope, sans-serif;
+    overflow: hidden;
 }
 
 .shared-image {
-    width: 200px;
+    width: 600px;
+    max-width: calc(100% - 8px);
+    margin: 0 auto;
+    position: relative;
+    border-radius: 4px;
+    transition: box-shadow 0.2s ease;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.shared-image:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 #file-dropzone-container {
@@ -22,7 +33,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
 }
 
 #file-input {
@@ -46,4 +56,20 @@ body {
 /*fallback form for old browsers*/
 #upload-form {
     display: none;
+}
+
+#shared-files {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+#auth-status-container {
+    position: absolute;
+    right: 8px;
+    top: 8px;
 }
