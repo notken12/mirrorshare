@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="./styles/index.css">
     <title>MirrorShare</title>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
 </head>
 
 <body>
-    <div id="file-dropzone-container">
+    <div id="file-dropzone-container" style="display: none;">
         <input type="file" name="file" id="file-input">
 
         <div id="file-dropzone" class="upload-area">
@@ -24,14 +25,27 @@
         <input type="submit" id="submit-file" value="Upload file">
     </form>
 
-    <div id="auth-status-container">
-        <img src="" alt="Profile picture" id="profile-picture">
-        <div id="sign-in-status"></div>
-        <button id="sign-in-button">Sign in</button>
-        <button id="sign-out-button">Sign out</button>
+    <div id="login-container" style="display: none;">
+        <div>
+            <div id="homepage-title">
+                <h1>MirrorShare</h1>
+                <h2>Instantly send files between your devices.</h2>
+            </div>
+            <button id="sign-in-button">Get started</button>
+            <div id="firebaseui-auth-container"></div>
+        </div>
+    </div>
+
+    <div id="auth-status-container" style="display: none;">
+        <img src="" alt="Profile picture" id="profile-picture" style="display: none;">
+        <div id="sign-in-status">
+            <p id="username"></p>
+            <p id="email"></p>
+        </div>
+        <button id="sign-out-button" class="material-icons">logout</button>
         <div id="account-details"></div>
     </div>
-    <div id="firebaseui-auth-container"></div>
+
 
     <canvas id="copy-canvas" style="display: none;"></canvas>
 

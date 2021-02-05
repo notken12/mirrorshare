@@ -14,10 +14,19 @@ define(["app/auth", "app/db", "app/el"], function (auth, db, el) {
                 isAnonymous: user.isAnonymous
             });
 
-            el.auth.signInStatus.text('Signed in as ' + user.displayName + " (" + user.email + ")");
+            el.fileDropzoneContainer.fadeIn("fast");
+
+            el.auth.loginContainer.hide();
+
+            el.auth.username.text(user.displayName);
+            el.auth.email.text(user.email);
             el.auth.signOutButton.show();
             el.auth.signInButton.hide();
             el.auth.profilePicture.attr("src", user.photoURL);
+            el.auth.profilePicture.show();
+            
+
+            el.auth.container.fadeIn('fast');
         }
     }
 });

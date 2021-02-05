@@ -1,13 +1,18 @@
 @font-face {
     font-family: Manrope;
+    font-weight: normal;
     src: url("../fonts/Manrope-Medium.ttf");
 }
 
 body {
-    background: #fff;
+    background: #fafafa;
     color: #111;
-    font-family: Manrope, sans-serif;
+    font-family: Manrope, sans-serif!important;
     overflow: hidden;
+}
+
+button {
+    font-family: Manrope, sans-serif;
 }
 
 .shared-image {
@@ -50,7 +55,7 @@ body {
 }
 
 .upload-area.highlight {
-    background: #333;
+    background: #eee;
 }
 
 /*fallback form for old browsers*/
@@ -73,11 +78,18 @@ body {
     position: absolute;
     right: 8px;
     top: 8px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    user-select: none;
 }
 
 #profile-picture {
     border-radius: 50%;
-    width: 64px;
+    width: 44px;
+    margin-right: 16px;
+    height: 44px;
 }
 
 #drop-event-catcher {
@@ -91,4 +103,86 @@ body {
 
 #drop-event-catcher.active {
     pointer-events: initial;
+}
+
+#username {
+    margin: 0;
+    font-weight: bold;
+}
+
+#email {
+    margin: 0;
+    color: #666;
+}
+
+#sign-in-status {
+}
+
+#sign-out-button {
+    color: #f44336;
+    border: none;
+    background: none;
+    width: 44px;
+    height: 44px;
+    margin-left: 16px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+#sign-in-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: auto;
+    display: block;
+    outline: none;
+    font-size: 100%;
+    font-weight: bold;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    margin-bottom: -16px;
+    transition: box-shadow 200ms ease;
+}
+
+#sign-in-button:hover {
+    box-shadow: rgba(50, 50, 93, 0.3) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+#login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    margin: -8px;
+}
+
+#login-container > div {
+    border: 1px #666 solid;
+    padding: 32px;
+    border-radius: 6px;
+}
+
+#login-container h1 {
+    font-weight: bold;
+}
+
+#firebaseui-auth-container {
+    margin-top: 24px;
+}
+
+#homepage-title {
+    text-align: center;
+}
+
+#homepage-title h1 {
+    font-size: 400%;
+    margin: 0;
+}
+
+#homepage-title h2 {
+    margin: 0;
+    margin-bottom: 24px;
 }

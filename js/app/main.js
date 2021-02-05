@@ -60,11 +60,17 @@ requirejs(['jquery', 'app/helper/util', 'print', 'app/auth', 'app/db', 'app/el',
                 });
             } else {
                 // User is signed out.
-                el.auth.signInStatus.text('Signed out');
+                el.auth.username.text('Signed out');
                 el.auth.signInButton.show();
                 el.auth.signOutButton.hide();
 
-                el.auth.signInButton.click(authui.start);
+                el.auth.signInButton.click(() => {
+                    authui.start();
+                    el.auth.signInButton.hide();
+                    $("#homepage-title").hide();
+                    util.fadeInNoFlicker($("#firebaseui-auth-container"));
+                });
+                el.auth.loginContainer.fadeIn('slow');
             }
         }, function (error) {
             console.log(error);

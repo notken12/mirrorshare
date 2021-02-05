@@ -16,6 +16,7 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
         util.fadeOutNoFlicker(el.sharedFiles);
 
         el.fileDropzoneLabel.text("Drop file here");
+        el.fileDropzone.addClass("highlight");
         util.fadeInNoFlicker(el.fileDropzoneLabel);
     }
 
@@ -24,6 +25,7 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
         e.preventDefault();
 
         util.fadeInNoFlicker(el.sharedFiles);
+        el.fileDropzone.removeClass("highlight");
 
         el.fileDropzoneLabel.text("Drop files here or click to choose files");
         if (el.sharedFiles.children().length < 1) {
@@ -39,6 +41,9 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
 
         var files = e.originalEvent.dataTransfer.files;
         upload(files);
+        el.fileDropzoneLabel.text("Drop files here or click to choose files");
+        el.fileDropzone.removeClass("highlight");
+        el.sharedFiles.show();
 
         el.dropEventCatcher.removeClass("active");
     }
