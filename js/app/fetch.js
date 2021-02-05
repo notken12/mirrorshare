@@ -25,55 +25,59 @@ define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], funct
                     var img = document.createElement("img");
                     img.classList.add("shared-image");
                     img.setAttribute("src", url);
-                    img.setAttribute("title", "Click to copy");
+                    img.setAttribute("title", "Double click or long press to copy");
                     img.setAttribute("crossorigin", "anonymous");
-                    img.addEventListener('click', function () {
-                        /*var xhr = new XMLHttpRequest();
-                        xhr.responseType = 'blob';
-                        xhr.onload = (event) => {
-                            var blob = xhr.response;
-                            var i = {};
-                            i["blob.type"] = blob;
-                            try {
-                                navigator.clipboard.write([
-                                    new ClipboardItem(i)
-                                ]);
-                            } catch (error) {
-                                console.error(error);
-                            }
-                        };
-                        xhr.open('GET', url);
-                        xhr.send();*/
 
-                        var c = document.createElement('canvas');
-                        var ctx = c.getContext('2d');
-                        c.width = this.naturalWidth;
-                        c.height = this.naturalHeight;
-                        ctx.drawImage(this, 0, 0);
-                        var imgBlob;
-                        c.toBlob((blob)=>{
-                            try {
-                                navigator.clipboard.write([
-                                    new ClipboardItem({"image/png": blob})
-                                ]);
-                            } catch (error) {
-                                console.error(error);
+                    var blob;
+                    var c = el.copyingCanvas;
+                    var ctx = c.getContext('2d');
+
+                    img.onload = function() {
+                        c.width = img.naturalWidth;
+                        c.height = img.naturalHeight;
+                        ctx.drawImage(img, 0, 0);
+                        c.toBlob((b) => {
+                            blob = b;
+                            imgsToBeAdded.push(this);
+                            if (imgsToBeAdded.length == data.files.length) {
+                                //all images are loaded
+                                //replace shared images
+                                el.sharedFiles.empty();
+                                for (var image of imgsToBeAdded) {
+                                    el.sharedFiles.append(image);
+                                }
+                                util.fadeInNoFlicker(el.sharedFiles);
+                                util.fadeOutNoFlicker(el.fileDropzoneLabel);
                             }
                         });
-                        
-                    });
-
-                    imgsToBeAdded.push(img);
-                    if (imgsToBeAdded.length == data.files.length) {
-                        //all images are loaded
-                        //replace shared images
-                        el.sharedFiles.empty();
-                        for (var img of imgsToBeAdded) {
-                            el.sharedFiles.append(img);
-                        }
-                        util.fadeInNoFlicker(el.sharedFiles);
-                        util.fadeOutNoFlicker(el.fileDropzoneLabel);
                     }
+
+                    var timeout;
+                    $(img).on('touchstart', function () {
+                        timeout = setTimeout(() => {
+                            try {
+                                navigator.clipboard.write([
+                                    new ClipboardItem({ "image/png": blob })
+                                ]);
+                                console.log("copied image!");
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }, 750);
+                    });
+                    $(img).on('touchend', function () {
+                        clearTimeout(timeout);
+                    });
+                    $(img).on('dblclick', function () {
+                        try {
+                            navigator.clipboard.write([
+                                new ClipboardItem({ "image/png": blob })
+                            ]);
+                            console.log("copied image!");
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    });
                 });
 
 

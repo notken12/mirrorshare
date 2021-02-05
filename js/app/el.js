@@ -11,6 +11,7 @@ define(["jquery"], function ($) {
         sharedFiles: $("#shared-files"),
         uploadingLoader: $("#uploading-loader"),
         fileDropzone: $("#file-dropzone"),
-        fileDropzoneLabel: $("#file-dropzone h1")
+        fileDropzoneLabel: $("#file-dropzone h1"),
+        copyingCanvas: document.querySelector("#copy-canvas")
     }
 });
