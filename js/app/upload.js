@@ -3,34 +3,23 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
     $("html").on("dragover", function (e) {
         e.preventDefault();
         e.stopPropagation();
+
+        el.dropEventCatcher.addClass("active");
     });
 
-    $("html").on("drop", function (e) { e.preventDefault(); e.stopPropagation(); });
+    $("html").on("drop", function (e) { e.preventDefault(); e.stopPropagation(); el.dropEventCatcher.removeClass("active");});
 
-    // Drag enter
-    el.fileDropzone.on('dragenter', function (e) {
+    function dragEnterOver(e) {
         e.stopPropagation();
         e.preventDefault();
 
         util.fadeOutNoFlicker(el.sharedFiles);
 
         el.fileDropzoneLabel.text("Drop file here");
-        el.fileDropzoneLabel.fadeIn('fast');
-    });
+        util.fadeInNoFlicker(el.fileDropzoneLabel);
+    }
 
-    // Drag over
-    el.fileDropzone.on('dragover', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        util.fadeOutNoFlicker(el.sharedFiles);
-
-        el.fileDropzoneLabel.text("Drop file here");
-        el.fileDropzoneLabel.fadeIn('fast');
-    });
-
-    // Drag leave
-    el.fileDropzone.on('dragleave', function (e) {
+    function dragLeave(e) {
         e.stopPropagation();
         e.preventDefault();
 
@@ -40,16 +29,31 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
         if (el.sharedFiles.children().length < 1) {
             util.fadeInNoFlicker(el.fileDropzoneLabel);
         }
-    });
 
-    // Drop
-    el.fileDropzone.on('drop', function (e) {
+        el.dropEventCatcher.removeClass("active");
+    }
+
+    function drop(e) {
         e.stopPropagation();
         e.preventDefault();
 
         var files = e.originalEvent.dataTransfer.files;
         upload(files);
-    });
+
+        el.dropEventCatcher.removeClass("active");
+    }
+
+    // Drag enter
+    el.dropEventCatcher.on('dragenter', dragEnterOver);
+
+    // Drag over
+    el.dropEventCatcher.on('dragover', dragEnterOver);
+
+    // Drag leave
+    el.dropEventCatcher.on('dragleave', dragLeave);
+
+    // Drop
+    el.dropEventCatcher.on('drop', drop);
 
     // Open file selector on div click
     el.fileDropzone.click(function(){
@@ -70,6 +74,7 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
             //no file
             return;
         }
+
         
         util.fadeInNoFlicker(el.fileDropzoneLabel);
         el.fileDropzoneLabel.text("Uploading...");
@@ -97,6 +102,19 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
 
             var fileRef = filesRef.child(id + "." + extension);
 
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var image = document.createElement('img');
+                //result image data
+                image.src = e.target.result;
+                image.classList.add("shared-image");
+                el.sharedFiles.empty();
+                el.sharedFiles.append(image);
+
+                console.log('attached image');
+            }
+            reader.readAsDataURL(file);
+
             fileRef.put(file).then(function (snapshot) {
                 filesDoc.set({
                     files: [
@@ -107,9 +125,8 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
                         }
                     ]
                 }).then(() => {
-                    el.fileDropzoneLabel.text("Drop files here or click to choose files");
+                    console.log('file uploaded!')
                 });
-                console.log("uploaded a file!");
             });
         }
     }

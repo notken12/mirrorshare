@@ -14,6 +14,8 @@ define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], funct
                 return;
             }
 
+            console.log('received image');
+
             var data = doc.data();
             var imgsToBeAdded = [];
 
@@ -22,6 +24,8 @@ define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], funct
                 var fileRef = filesRef.child(filename);
 
                 fileRef.getDownloadURL().then((url) => {
+                    console.log("retrieved url");
+
                     var img = document.createElement("img");
                     img.classList.add("shared-image");
                     img.setAttribute("src", url);
@@ -32,24 +36,34 @@ define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], funct
                     var c = el.copyingCanvas;
                     var ctx = c.getContext('2d');
 
+                    console.log('created img and ctx');
+
                     img.onload = function() {
                         c.width = img.naturalWidth;
                         c.height = img.naturalHeight;
                         ctx.drawImage(img, 0, 0);
+
+                        console.log('image loaded');
                         c.toBlob((b) => {
                             blob = b;
-                            imgsToBeAdded.push(this);
-                            if (imgsToBeAdded.length == data.files.length) {
-                                //all images are loaded
-                                //replace shared images
-                                el.sharedFiles.empty();
-                                for (var image of imgsToBeAdded) {
-                                    el.sharedFiles.append(image);
-                                }
-                                util.fadeInNoFlicker(el.sharedFiles);
-                                util.fadeOutNoFlicker(el.fileDropzoneLabel);
-                            }
+
+                            console.log('created blob');
+
+
                         });
+
+                        imgsToBeAdded.push(this);
+                        if (imgsToBeAdded.length == data.files.length) {
+                            //all images are loaded
+                            //replace shared images
+                            el.sharedFiles.empty();
+                            for (var image of imgsToBeAdded) {
+                                el.sharedFiles.append(image);
+                            }
+                            util.fadeInNoFlicker(el.sharedFiles);
+                            util.fadeOutNoFlicker(el.fileDropzoneLabel);
+
+                        }
                     }
 
                     var timeout;

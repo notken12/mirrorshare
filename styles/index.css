@@ -54,6 +54,7 @@ body {
 }
 
 /*fallback form for old browsers*/
+
 #upload-form {
     display: none;
 }
@@ -72,4 +73,22 @@ body {
     position: absolute;
     right: 8px;
     top: 8px;
+}
+
+#profile-picture {
+    border-radius: 50%;
+    width: 64px;
+}
+
+#drop-event-catcher {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+#drop-event-catcher.active {
+    pointer-events: initial;
 }

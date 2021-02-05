@@ -17,7 +17,7 @@ define(["app/auth", "app/db", "app/el"], function (auth, db, el) {
             el.auth.signInStatus.text('Signed in as ' + user.displayName + " (" + user.email + ")");
             el.auth.signOutButton.show();
             el.auth.signInButton.hide();
-
+            el.auth.profilePicture.attr("src", user.photoURL);
         }
     }
 });

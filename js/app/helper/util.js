@@ -32,5 +32,5 @@ define({
             selection.removeAllRanges();
             selection.addRange(range);
         }
-    }
+    },
 });

@@ -4,7 +4,8 @@ define(["jquery"], function ($) {
             signInStatus: $("#sign-in-status"),
             signInButton: $("#sign-in-button"),
             accountDetails: $("#account-details"),
-            signOutButton: $("#sign-out-button")
+            signOutButton: $("#sign-out-button"),
+            profilePicture: $("#profile-picture")
         },
         submitFile: $("#submit-file"),
         fileInput: $("#file-input"),
@@ -12,6 +13,7 @@ define(["jquery"], function ($) {
         uploadingLoader: $("#uploading-loader"),
         fileDropzone: $("#file-dropzone"),
         fileDropzoneLabel: $("#file-dropzone h1"),
-        copyingCanvas: document.querySelector("#copy-canvas")
+        copyingCanvas: document.querySelector("#copy-canvas"),
+        dropEventCatcher: $("#drop-event-catcher")
     }
 });
