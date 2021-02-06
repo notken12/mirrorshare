@@ -32,7 +32,7 @@ button {
 
 #file-dropzone-container {
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     position: absolute;
     top: 0;
     left: 0;
@@ -67,7 +67,7 @@ button {
 
 #shared-files {
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +95,7 @@ button {
 
 #drop-event-catcher {
     width: 100vw;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     position: fixed;
     top: 0;
     left: 0;
@@ -152,13 +152,12 @@ button {
 }
 
 #login-container {
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     justify-content: center;
     align-items: center;
     user-select: none;
     margin: -8px;
-    padding: 16px;
 }
 
 #login-container > div {
