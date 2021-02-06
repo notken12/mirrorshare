@@ -8,7 +8,8 @@ body {
     background: #fafafa;
     color: #111;
     font-family: Manrope, sans-serif!important;
-    overflow: hidden;
+    overflow-x: hidden;
+    margin: 0;
 }
 
 button {
@@ -164,6 +165,7 @@ button {
     border: 1px #666 solid;
     padding: 32px;
     border-radius: 6px;
+    max-width: calc(100vw - 80px);
 }
 
 #login-container h1 {
