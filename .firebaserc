@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "mirror-share"
+  },
+  "targets": {
+    "mirror-share": {
+      "hosting": {
+        "mirrorshare.web.app": [
+          "mirrorshare"
+        ],
+        "mirror-share.web.app": [
+          "mirror-share"
+        ]
+      }
+    }
   }
 }

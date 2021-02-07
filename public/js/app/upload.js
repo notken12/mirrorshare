@@ -82,7 +82,7 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
 
         
         util.fadeInNoFlicker(el.fileDropzoneLabel);
-        el.fileDropzoneLabel.text("Uploading...");
+        el.fileDropzoneLabel.hide();
 
         var user = auth.currentUser;
         var uid = user.uid;
@@ -102,23 +102,35 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
         for (file of files) {
             var extension = util.getFileExtension(file.name);
 
-            var id = userDoc.collection("files").doc().id;
+            var id = /*userDoc.collection("files").doc().id*/ file.name;
             //var fileDoc = userDoc.collection("files").doc(id + "." + extension)
 
-            var fileRef = filesRef.child(id + "." + extension);
+            var fileRef = filesRef.child('0');
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var image = document.createElement('img');
-                //result image data
-                image.src = e.target.result;
-                image.classList.add("shared-image");
+            var type = file.type;
+            if (type.startsWith("image")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var image = document.createElement('img');
+                    //result image data
+                    image.src = e.target.result;
+                    image.classList.add("shared-image");
+                    image.classList.add("not-loaded");
+                    el.sharedFiles.empty();
+                    el.sharedFiles.append(image);
+    
+                    console.log('attached image');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                var preview = el.createFilePreview(id);
+
                 el.sharedFiles.empty();
-                el.sharedFiles.append(image);
-
-                console.log('attached image');
+                el.sharedFiles.append(preview);
+                util.fadeInNoFlicker(el.sharedFiles);
             }
-            reader.readAsDataURL(file);
+
+            
 
             fileRef.put(file).then(function (snapshot) {
                 filesDoc.set({
@@ -126,7 +138,7 @@ define(["jquery", "app/auth", "app/db", "app/storage", "app/el", "app/helper/uti
                         {
                             uploadDate: new Date(),
                             extension: extension,
-                            name: id + "." + extension
+                            name: id
                         }
                     ]
                 }).then(() => {

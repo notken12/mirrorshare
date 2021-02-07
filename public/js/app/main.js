@@ -77,10 +77,9 @@ requirejs(['jquery', 'app/helper/util', 'print', 'app/auth', 'app/db', 'app/el',
                 el.auth.signOutButton.hide();
 
                 el.auth.signInButton.click(() => {
+                    el.auth.loginContainer.fadeOut('fast');
+                    $("#firebase-auth-centerer").fadeIn('fast');
                     authui.start();
-                    el.auth.signInButton.hide();
-                    $("#homepage-title").hide();
-                    util.fadeInNoFlicker($("#firebaseui-auth-container"));
                 });
                 el.auth.loginContainer.fadeIn('slow');
             }

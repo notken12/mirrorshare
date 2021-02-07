@@ -7,23 +7,38 @@
 body {
     background: #fafafa;
     color: #111;
-    font-family: Manrope, sans-serif!important;
+    font-family: Manrope, Roboto, sans-serif!important;
     overflow-x: hidden;
     margin: 0;
 }
 
 button {
-    font-family: Manrope, sans-serif;
+    font-family: Manrope, Roboto, sans-serif;
 }
 
 .shared-image {
     width: 600px;
-    max-width: calc(100% - 8px);
+    border-radius: 4px;
+}
+
+.shared-image, .shared-file {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: box-shadow 0.2s ease, opacity 150ms ease;
+    max-width: calc(100% - 48px);
     margin: 0 auto;
     position: relative;
-    border-radius: 4px;
-    transition: box-shadow 0.2s ease;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.shared-image.not-loaded {
+    opacity: 0.7;
+}
+
+.shared-file.not-loaded {
+    opacity: 0.7;
+}
+
+.not-loaded {
+    cursor: progress;
 }
 
 .shared-image:hover {
@@ -71,8 +86,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: -8px;
-    margin-top: -8px;
 }
 
 #auth-status-container {
@@ -84,6 +97,7 @@ button {
     padding: 16px;
     display: flex;
     user-select: none;
+    background: #fff;
 }
 
 #profile-picture {
@@ -116,8 +130,7 @@ button {
     color: #666;
 }
 
-#sign-in-status {
-}
+#sign-in-status {}
 
 #sign-out-button {
     color: #f44336;
@@ -143,7 +156,6 @@ button {
     padding: 10px;
     background: white;
     border-radius: 4px;
-    margin-bottom: -16px;
     transition: box-shadow 200ms ease;
 }
 
@@ -157,17 +169,16 @@ button {
     justify-content: center;
     align-items: center;
     user-select: none;
-    margin: -8px;
 }
 
-#login-container > div {
+#login-container>div {
     border: 1px #666 solid;
     padding: 32px;
     border-radius: 6px;
     max-width: calc(100vw - 80px);
 }
 
-#login-container h1 {
+#login-container>h1 {
     font-weight: bold;
 }
 
@@ -179,7 +190,7 @@ button {
     text-align: center;
 }
 
-#homepage-title h1 {
+#homepage-title>h1 {
     font-size: 400%;
     margin: 0;
 }
@@ -187,4 +198,43 @@ button {
 #homepage-title h2 {
     margin: 0;
     margin-bottom: 24px;
+}
+
+.mdl-button {
+    font-family: Manrope, Roboto, sans-serif;
+}
+
+#firebase-auth-centerer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--vh, 1vh) * 100);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+.shared-file {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+.shared-file h1 {
+    display: inline;
+}
+
+.download-button {
+    padding: 0;
+    font-size: 36px;
+    border: none;
+    outline: none;
+    background: none;
+    position: relative;
+    top: 6px;
+    margin-left: 12px;
+    cursor: pointer;
 }

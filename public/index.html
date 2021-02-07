@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MirrorShare</title>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
     <link rel="stylesheet" href="./styles/index.css">
@@ -33,8 +33,10 @@
                 <h2>Instantly send files between your devices.</h2>
             </div>
             <button id="sign-in-button">Get started</button>
-            <div id="firebaseui-auth-container"></div>
         </div>
+    </div>
+    <div id="firebase-auth-centerer" style="display: none;">
+        <div id="firebaseui-auth-container"></div>
     </div>
 
     <div id="auth-status-container" style="display: none;">
@@ -43,7 +45,7 @@
             <p id="username"></p>
             <p id="email"></p>
         </div>
-        <button id="sign-out-button" class="material-icons">logout</button>
+        <button id="sign-out-button" class="material-icons-outlined">logout</button>
         <div id="account-details"></div>
     </div>
 
