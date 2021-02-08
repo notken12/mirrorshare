@@ -36,6 +36,12 @@ define(["app/auth", "app/db", "app/storage", "app/el", "app/helper/util"], funct
                             img.setAttribute("title", "Double click or long press to copy");
                             img.setAttribute("crossorigin", "anonymous");
 
+                            var newFileTimeout;
+                            img.addEventListener('click', function (e) {
+                                clearTimeout(newFileTimeout);
+                                newFileTimeout = setTimeout(function() {el.fileDropzone.click()}, 750);
+                            });
+
                             var blob;
                             var c = el.copyingCanvas;
                             var ctx = c.getContext('2d');
