@@ -16,7 +16,10 @@ body {
     font-family: Manrope, Roboto, sans-serif!important;
     overflow-x: hidden;
     margin: 0;
-    scroll-behavior: smooth!important;
+}
+
+html {
+    overflow-x: hidden;
 }
 
 button {

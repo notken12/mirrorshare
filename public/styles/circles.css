@@ -1,5 +1,6 @@
 #login-container {
     background: #fafafa;  
+    overflow: hidden;
 }
 
 .circles {
