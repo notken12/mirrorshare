@@ -17,6 +17,7 @@ define(["app/auth", "app/db", "app/el"], function (auth, db, el) {
             el.fileDropzoneContainer.fadeIn("fast");
 
             el.auth.loginContainer.hide();
+            $("#about").hide();
 
             el.auth.username.text(user.displayName);
             el.auth.email.text(user.email);

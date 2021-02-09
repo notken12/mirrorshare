@@ -20,6 +20,8 @@ define(["jquery"], function ($) {
         fileDropzoneContainer: $("#file-dropzone-container"),
         copyingCanvas: document.querySelector("#copy-canvas"),
         dropEventCatcher: $("#drop-event-catcher"),
+        scrollToAbout: $("#to-about"),
+        about: $("#about"),
         createFilePreview: function (name) {
             var preview = document.createElement("a");
             preview.classList.add("shared-file");

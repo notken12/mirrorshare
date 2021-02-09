@@ -1,5 +1,11 @@
 @font-face {
     font-family: Manrope;
+    font-weight: bold;
+    src: url("../fonts/Manrope-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: Manrope;
     font-weight: normal;
     src: url("../fonts/Manrope-Medium.ttf");
 }
@@ -10,10 +16,15 @@ body {
     font-family: Manrope, Roboto, sans-serif!important;
     overflow-x: hidden;
     margin: 0;
+    scroll-behavior: smooth!important;
 }
 
 button {
     font-family: Manrope, Roboto, sans-serif;
+}
+
+button:active {
+    background: #ddd!important;
 }
 
 .shared-image {
@@ -177,10 +188,11 @@ button {
     user-select: none;
 }
 
-#login-container>div {
+#title-container {
     border: 1px #666 solid;
     padding: 32px;
     border-radius: 6px;
+    z-index: 10;
     max-width: calc(100vw - 80px);
 }
 
@@ -243,4 +255,81 @@ button {
     top: 6px;
     margin-left: 12px;
     cursor: pointer;
+}
+
+#about {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    z-index: 10;
+    position: absolute;
+}
+
+#about section {
+    padding: 16px;
+}
+
+#about section h1 {
+    font-size: 48px;
+}
+
+#about section p {
+    font-size: 24px;
+}
+
+#about section:nth-child(odd) {
+    border-bottom: 3px black solid;
+    background: #f1f1f1;
+}
+
+#about section:nth-child(even) {
+    background: #fafafa;
+}
+
+/*#about section:nth-child(odd):after {
+    content:"";
+    position:absolute;
+    width:100%;
+    bottom:1px;
+    z-index:-1;
+    transform:scale(.9);
+
+}*/
+
+#to-about {
+    border: none;
+    padding: 0px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    width: 100vw;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    transition: box-shadow 100ms ease;
+    outline: none;
+    font-size: 32px;
+}
+
+.bounce {
+    animation: bounce 2s;
+    transition: translateY 200ms ease;
+}
+
+.bounce:hover {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 25%, 50%, 75%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-12px);
+    }
+}
+
+#to-about:hover {
+    /*box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;*/
 }

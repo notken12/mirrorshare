@@ -75,9 +75,11 @@ requirejs(['jquery', 'app/helper/util', 'print', 'app/auth', 'app/db', 'app/el',
                 el.auth.username.text('Signed out');
                 el.auth.signInButton.show();
                 el.auth.signOutButton.hide();
+                $("#about").fadeIn('fast');
 
                 el.auth.signInButton.click(() => {
                     el.auth.loginContainer.fadeOut('fast');
+                    $("#about").fadeOut('fast');
                     $("#firebase-auth-centerer").fadeIn('fast');
                     authui.start();
                 });

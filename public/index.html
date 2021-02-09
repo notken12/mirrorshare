@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MirrorShare</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/circles.css">
     <link rel="stylesheet" href="./styles/index-mobile.css">
 </head>
 
@@ -27,13 +30,45 @@
     </form>
 
     <div id="login-container" style="display: none;">
-        <div>
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div id="title-container">
             <div id="homepage-title">
                 <h1>MirrorShare</h1>
                 <h2>Instantly send files between your devices.</h2>
             </div>
             <button id="sign-in-button">Get started</button>
         </div>
+        <div id="to-about" class="material-icons-outlined bounce">arrow_downward</div>
+
+    </div>
+    <div id="about" style="display: none;">
+        <section>
+            <h1>It's like AirDrop, but it works on anything.</h1>
+            <p>
+                Unite your phone and computer.
+                Say goodbye to emailing yourself and downloading images you won't use a second time.
+                <b>Just copy and use.</b>
+                Uploading only takes a click.
+
+            </p>
+        </section>
+
+        <section>
+            <h1>5 second signup.</h1>
+            <p>Just connect your Google account and <b>you're good to go</b>. Don't have one? You can also use email +
+                password to log in.</p>
+        </section>
     </div>
     <div id="firebase-auth-centerer" style="display: none;">
         <div id="firebaseui-auth-container"></div>
