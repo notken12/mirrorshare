@@ -1,7 +1,5 @@
 #login-container {
     background: #fafafa;  
-    width: 100%;
-    height:100vh;
 }
 
 .circles {
@@ -11,6 +9,8 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
 .circles li {
